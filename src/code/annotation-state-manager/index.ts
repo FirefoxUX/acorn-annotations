@@ -79,7 +79,6 @@ export class AnnotationStateManager {
     return this.state.annotations
   }
 
-  // Getter for mergedInfoGroups (backward compatibility)
   get mergedInfoGroups(): MergedInfoGroup[] {
     return this.state.mergedInfoGroups
   }

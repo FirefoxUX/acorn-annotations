@@ -105,7 +105,6 @@ async function updateSelectedReference(setNull = false): Promise<void> {
   const frameKind = detectFrameKind(selection)
 
   if (!annotationStateManager || setNull) {
-    publicState.selectedReference = null
     messenger.notify('selection-changed', {
       count: selection.length,
       references: [],
@@ -144,17 +143,6 @@ async function updateSelectedReference(setNull = false): Promise<void> {
         }
       }
     }
-  }
-
-  // Backward compat: set selectedReference for single match
-  if (resolvedRefs.size === 1) {
-    const ref = [...resolvedRefs][0]
-    const annotation = annotations.find((a) => a.strReference === ref)
-    publicState.selectedReference = annotation
-      ? { reference: annotation.strReference, kind: annotation.kind }
-      : null
-  } else {
-    publicState.selectedReference = null
   }
 
   messenger.notify('selection-changed', {

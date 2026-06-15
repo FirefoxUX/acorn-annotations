@@ -1,7 +1,3 @@
-// Re-export decodeReference and encodeReference from shared-utils
-// so existing imports from @code/utils continue to work
-export { decodeReference, encodeReference } from '@src/shared-utils'
-
 type ProxyableObject = Record<string | symbol, unknown>
 
 export function createObservableState<T extends Record<string, unknown>>(
@@ -186,6 +182,3 @@ export function createObservableState<T extends Record<string, unknown>>(
 
   return proxiedState
 }
-
-// decodeReference and encodeReference are now in @src/shared-utils
-// and re-exported above for backward compatibility

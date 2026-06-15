@@ -100,7 +100,7 @@ export function registerAnnotationHandlers(
   )
 
   messenger.on('select-annotation-markers', (strReference) =>
-    selectAnnotationMarkers(publicState, getManager, handleError, strReference),
+    selectAnnotationMarkers(getManager, handleError, strReference),
   )
 }
 
@@ -643,7 +643,6 @@ export async function reorderMultipleAnnotationsByIndex(
 }
 
 export async function selectAnnotationMarkers(
-  publicState: PublicState,
   getManager: ManagerGetter,
   handleError: (error: unknown, operation: string) => { error: string },
   strReference: string,
@@ -685,13 +684,6 @@ export async function selectAnnotationMarkers(
 
     // Set the selection to the marker nodes
     figma.currentPage.selection = markerNodes
-
-    // The selection change will automatically update the selected reference
-    // but we'll set it directly as well to ensure consistency
-    publicState.selectedReference = {
-      reference: record.strReference,
-      kind: record.kind,
-    }
 
     return { success: true }
   } catch (error) {

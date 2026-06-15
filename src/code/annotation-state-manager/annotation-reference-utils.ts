@@ -3,15 +3,15 @@ import type {
   MultiReference,
   SingleReference,
 } from '@src/types'
-import { decodeReference, encodeReference } from '@code/utils'
+import { decodeReference, encodeReference } from '@src/shared-utils'
 import { Reference } from './reference'
 
 /** Utilities for handling annotation reference parsing, validation, and encoding */
 export class ReferenceUtils {
   /**
-   * Safely parses a string reference, returning null if parsing fails. This
-   * method maintains backward compatibility while using the Reference class
-   * internally.
+   * Safely parses a string reference, returning null if parsing fails. Tries
+   * the Reference class first, then falls back to legacy regex parsing for
+   * edge cases like non-numeric/non-letter input.
    */
   static tryParseReference(reference: SingleReference): {
     referenceNumber: number

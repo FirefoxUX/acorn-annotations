@@ -100,11 +100,6 @@ export type ValidatedFrameGroup = SavedFrameGroup & {
   }
 }
 
-export type SelectedReferenceInfo = {
-  reference: SingleReference
-  kind: AnnotationKind
-} | null
-
 export type LockState =
   | 'all-unlocked' // Both annotations and design frame unlocked
   | 'design-locked' // Design frame locked, annotations unlocked
@@ -117,7 +112,6 @@ export type PublicState = {
   annotationType: AnnotationKind
   annotationMode: 'displace-group' | 'displace-multi'
   selectionGrouping: 'entire' | 'individual'
-  selectedReference: SelectedReferenceInfo
   sidebar: 'help' | 'debug' | null
   savedGroups: ValidatedFrameGroup[]
   lockState: LockState

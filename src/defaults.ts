@@ -15,7 +15,6 @@ export const DEFAULT_STATE: PublicState = {
   annotationType: 'tab',
   annotationMode: 'displace-multi',
   selectionGrouping: 'entire',
-  selectedReference: null,
   sidebar: null,
   frames: {
     annotationFrame: null,
