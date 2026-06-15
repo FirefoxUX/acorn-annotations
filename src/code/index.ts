@@ -12,6 +12,7 @@ import {
   registerFrameHandlers,
   registerModeHandlers,
   registerAnnotationHandlers,
+  registerAutoAnnotateHandlers,
   registerUIHandlers,
   registerSavedGroupsHandlers,
   restoreWindowSize,
@@ -45,6 +46,10 @@ export {
   reorderMultipleAnnotationsByIndex,
   selectAnnotationMarkers,
 } from './handlers/annotation-handlers'
+export {
+  autoAnnotateAcornComponents,
+  autoAnnotateAllComponents,
+} from './handlers/auto-annotate-handlers'
 export {
   selectSceneNode,
   toggleSidebar,
@@ -225,6 +230,8 @@ registerAnnotationHandlers(
   getLastAnnotationType,
   setLastAnnotationType,
 )
+
+registerAutoAnnotateHandlers(messenger, publicState, getManager, handleError)
 
 registerUIHandlers(messenger, publicState, getManager, handleError)
 

@@ -1,5 +1,6 @@
 export { registerFrameHandlers } from './frame-handlers'
 export { registerModeHandlers } from './mode-handlers'
 export { registerAnnotationHandlers } from './annotation-handlers'
+export { registerAutoAnnotateHandlers } from './auto-annotate-handlers'
 export { registerUIHandlers, restoreWindowSize } from './ui-handlers'
 export { registerSavedGroupsHandlers } from './saved-groups-handlers'

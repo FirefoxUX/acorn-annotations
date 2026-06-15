@@ -111,4 +111,3 @@ export function comparePositions(
   // Different rows: sort top to bottom
   return yDiff
 }
-

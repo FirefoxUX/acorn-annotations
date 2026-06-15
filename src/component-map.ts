@@ -1,10 +1,27 @@
 export type ComponentPlatform = 'desktop' | 'android' | 'ios'
 
+/**
+ * Annotation kind chosen for a component when auto-annotation runs.
+ *
+ * - `tab` / `note`: applied to desktop components per their typical role.
+ * - `skip`: the component is intentionally not annotated (e.g. wrappers whose
+ *   children will be annotated individually). Mobile entries ignore this field
+ *   — they always become `component-note`.
+ */
+export type AutoAnnotationKind = 'tab' | 'note' | 'skip'
+
 export interface ComponentMapEntry {
   technicalName: string
   displayName: string
   platform: ComponentPlatform
   figmaComponentKeys: string[]
+  annotationKind?: AutoAnnotationKind
+  /**
+   * When true, auto-annotation pads the marker around the component (matches
+   * the "with padding" button in the UI). Useful for containers/groups whose
+   * children sit flush with the bounds.
+   */
+  gap?: boolean
 }
 
 export const COMPONENT_MAP: ComponentMapEntry[] = [
@@ -15,6 +32,7 @@ export const COMPONENT_MAP: ComponentMapEntry[] = [
     technicalName: 'moz-badge',
     displayName: 'Badge',
     platform: 'desktop',
+    annotationKind: 'note',
     figmaComponentKeys: [
       '02fb1cbc3fa8e87ac6d334b074737f2f757e7995', // Badge
       '103500df3f5f3e20f630a8790ade502b7fd336a8', // Badge (Nova)
@@ -24,6 +42,7 @@ export const COMPONENT_MAP: ComponentMapEntry[] = [
     technicalName: 'moz-box-button',
     displayName: 'Box Button',
     platform: 'desktop',
+    annotationKind: 'tab',
     figmaComponentKeys: [
       '2a1323040947e498ffea33776b92cd88e769e8e9', // Box / Button
       '2bc581d42f92580772f7a2ad788106824885ffdf', // Box / Button (Nova)
@@ -33,6 +52,8 @@ export const COMPONENT_MAP: ComponentMapEntry[] = [
     technicalName: 'moz-box-group',
     displayName: 'Box Group',
     platform: 'desktop',
+    annotationKind: 'note',
+    gap: true,
     figmaComponentKeys: [
       '85e747ba7a18d237983f102d33df84b2137487c6', // Box / Group
       '53dd571786e4d1f45bf7455b99b954a0be601b46', // Box / Group (Nova)
@@ -42,6 +63,7 @@ export const COMPONENT_MAP: ComponentMapEntry[] = [
     technicalName: 'moz-box-item',
     displayName: 'Box Item',
     platform: 'desktop',
+    annotationKind: 'note',
     figmaComponentKeys: [
       'f4a5acf66ea95be055bae3d8340cbe11f76766b8', // Box / Item
       'd54e3fcb8e0f9cd43160f00122eefad6665c80be', // Box / Item (Nova)
@@ -51,6 +73,7 @@ export const COMPONENT_MAP: ComponentMapEntry[] = [
     technicalName: 'moz-box-link',
     displayName: 'Box Link',
     platform: 'desktop',
+    annotationKind: 'tab',
     figmaComponentKeys: [
       '6a9d0b68e010d04ff11b5c2983f137473d937a5e', // Box / Link
       'c28e4b768c4c7f105628a1fa1bceb73b2c6297d5', // Box / Link (Nova)
@@ -60,12 +83,15 @@ export const COMPONENT_MAP: ComponentMapEntry[] = [
     technicalName: 'moz-breadcrumb-group',
     displayName: 'Breadcrumb Group',
     platform: 'desktop',
+    annotationKind: 'note',
+    gap: true,
     figmaComponentKeys: [],
   },
   {
     technicalName: 'moz-button',
     displayName: 'Button',
     platform: 'desktop',
+    annotationKind: 'tab',
     figmaComponentKeys: [
       '3faec6bac359bc6bc836b3ff62c230b45e06c70f', // Button
       'f76d122d6762c71d730a7dd22ca5d0ec77bfcbf2', // Button (Nova)
@@ -79,6 +105,7 @@ export const COMPONENT_MAP: ComponentMapEntry[] = [
     technicalName: 'moz-button-group',
     displayName: 'Button Group',
     platform: 'desktop',
+    annotationKind: 'skip',
     figmaComponentKeys: [
       'c76b82398f25d989d5d026b4d956799d3cc99938', // Button group
       '1a0a98a32f5b3715ca8fcb3d01f73da9955e0b6c', // Button group (Nova)
@@ -88,6 +115,7 @@ export const COMPONENT_MAP: ComponentMapEntry[] = [
     technicalName: 'moz-card',
     displayName: 'Card',
     platform: 'desktop',
+    annotationKind: 'note',
     figmaComponentKeys: [
       'd1170bce343865c3430d760127d521ac2f0a3139', // Card
       '4ed4455674e73e5175ebeb6562b248298a1552da', // Card (Nova)
@@ -97,6 +125,7 @@ export const COMPONENT_MAP: ComponentMapEntry[] = [
     technicalName: 'moz-checkbox',
     displayName: 'Checkbox',
     platform: 'desktop',
+    annotationKind: 'tab',
     figmaComponentKeys: [
       'ea082a74a444e2c8882d1f942dd24c55d94fda72', // Checkbox with label
       'a4a27efbe285b4ea008e67c973eb71816ca234fc', // Checkbox
@@ -108,6 +137,8 @@ export const COMPONENT_MAP: ComponentMapEntry[] = [
     technicalName: 'moz-fieldset',
     displayName: 'Fieldset',
     platform: 'desktop',
+    annotationKind: 'note',
+    gap: true,
     figmaComponentKeys: [
       'd1f4ed2a27f3888c5400fc1a3649def5ed49ad41', // Fieldset
       '8112a50c9e4f9ab7e8bcbb09fe68368f9c797550', // Fieldset (Nova)
@@ -117,6 +148,7 @@ export const COMPONENT_MAP: ComponentMapEntry[] = [
     technicalName: 'moz-five-star',
     displayName: 'Five Star',
     platform: 'desktop',
+    annotationKind: 'tab',
     figmaComponentKeys: [
       '10de3de0de9b742a6b7e29370b3f2168bcddacd9', // Five Stars
       'ae76d053a07d2276504e5757c5dd931b887abce8', // Five Stars (Nova)
@@ -126,6 +158,7 @@ export const COMPONENT_MAP: ComponentMapEntry[] = [
     technicalName: 'moz-input-color',
     displayName: 'Input Color',
     platform: 'desktop',
+    annotationKind: 'tab',
     figmaComponentKeys: [
       '0590759e9bae2663d167751b2fdd85da31f40ae2', // Input Color
       'c5364360554892bdf458459db7345b6db72e9105', // Color picker (Nova)
@@ -135,12 +168,14 @@ export const COMPONENT_MAP: ComponentMapEntry[] = [
     technicalName: 'moz-input-folder',
     displayName: 'Input Folder',
     platform: 'desktop',
+    annotationKind: 'tab',
     figmaComponentKeys: [],
   },
   {
     technicalName: 'moz-input-password',
     displayName: 'Input Password',
     platform: 'desktop',
+    annotationKind: 'tab',
     figmaComponentKeys: [
       '5deb3dfd6ef0fcd7afecc164a64ace23c3b6c8f4', // Input Password
       'dc8b127f2a07a42972e8a7293fb2f86eec9e2493', // Input Password / Input
@@ -152,6 +187,7 @@ export const COMPONENT_MAP: ComponentMapEntry[] = [
     technicalName: 'moz-input-search',
     displayName: 'Input Search',
     platform: 'desktop',
+    annotationKind: 'tab',
     figmaComponentKeys: [
       'fc8f56e06763b8cd06126359e7a79b07e5a17973', // Input Search
       'eddfc0aabd968a254fb1b32130a4214c4b8c6807', // Input Search / Input
@@ -163,6 +199,7 @@ export const COMPONENT_MAP: ComponentMapEntry[] = [
     technicalName: 'moz-input-text',
     displayName: 'Input Text',
     platform: 'desktop',
+    annotationKind: 'tab',
     figmaComponentKeys: [
       'e2da5f71b53bcc710f176556f1d4a4ca5fe9ec5b', // Input Text
       'c4167eff8e6907258b7a5d2ee41a8bace22421a7', // Input Text / Input
@@ -174,6 +211,7 @@ export const COMPONENT_MAP: ComponentMapEntry[] = [
     technicalName: 'moz-label',
     displayName: 'Label',
     platform: 'desktop',
+    annotationKind: 'note',
     figmaComponentKeys: [
       '06e492ffb2d304fab788e3c25d3774faf5da00db', // Label
       '305b3400793693894f227fb142134b3c2aceb3f5', // Label (Nova)
@@ -183,6 +221,7 @@ export const COMPONENT_MAP: ComponentMapEntry[] = [
     technicalName: 'moz-message-bar',
     displayName: 'Message Bar',
     platform: 'desktop',
+    annotationKind: 'note',
     figmaComponentKeys: [
       'df0010f61e8879691484579dcd505fa00592d6e2', // Message bar
       'feaef28b3e793928eecd31a24de43f5b716a9194', // Message bar (Nova)
@@ -192,6 +231,8 @@ export const COMPONENT_MAP: ComponentMapEntry[] = [
     technicalName: 'moz-page-nav',
     displayName: 'Page Nav',
     platform: 'desktop',
+    annotationKind: 'note',
+    gap: true,
     figmaComponentKeys: [
       '938c834c072543fd3154465dc4d9b73b987d3dfe', // Page navigation
       'c83d952793ef54963dc696f2814495bdfb241972', // Page navigation (Nova)
@@ -201,6 +242,7 @@ export const COMPONENT_MAP: ComponentMapEntry[] = [
     technicalName: 'moz-promo',
     displayName: 'Promo',
     platform: 'desktop',
+    annotationKind: 'note',
     figmaComponentKeys: [
       'f78185a82b82ae599ac09ae0947b277874c63ea5', // Promo
       'c72d19f26a39188b8f56764e49f3d4ea6167e913', // Promo (Nova)
@@ -210,6 +252,8 @@ export const COMPONENT_MAP: ComponentMapEntry[] = [
     technicalName: 'moz-radio-group',
     displayName: 'Radio Group',
     platform: 'desktop',
+    annotationKind: 'note',
+    gap: true,
     figmaComponentKeys: [
       'b664aadc7e67ee25a66fdc667f8c9fe208a26ade', // Radio Button with label
       '7b97463c1588b37fb3ba03223ac78e0f0ae4c3b5', // Radio Button
@@ -221,6 +265,7 @@ export const COMPONENT_MAP: ComponentMapEntry[] = [
     technicalName: 'moz-select',
     displayName: 'Select',
     platform: 'desktop',
+    annotationKind: 'tab',
     figmaComponentKeys: [
       '2849549e31439cbe6b3ab488e83fcee26914d776', // Dropdown
       '2bd49d584e0db4b5f7a4c0bd18c5923f21eb47b2', // Dropdown / Button
@@ -232,12 +277,14 @@ export const COMPONENT_MAP: ComponentMapEntry[] = [
     technicalName: 'moz-support-link',
     displayName: 'Support Link',
     platform: 'desktop',
+    annotationKind: 'tab',
     figmaComponentKeys: [],
   },
   {
     technicalName: 'moz-toggle',
     displayName: 'Toggle',
     platform: 'desktop',
+    annotationKind: 'tab',
     figmaComponentKeys: [
       '867756713eaa6feddc0cdc8c88d244d639740283', // Toggle switch with label
       '6505c18efc779b19c828b8f2d32975ad3e7d3dd4', // Toggle switch
@@ -249,6 +296,8 @@ export const COMPONENT_MAP: ComponentMapEntry[] = [
     technicalName: 'moz-visual-picker',
     displayName: 'Visual Picker',
     platform: 'desktop',
+    annotationKind: 'note',
+    gap: true,
     figmaComponentKeys: [
       'bb7ed508bed47793c0f9fe76b178c7ec5230870d', // Visual Picker Item
       '019c4e81987d7806cbd7c295141aa856d9f94d9d', // Visual Picker (Nova)
@@ -842,4 +891,20 @@ export function getAutocompleteItems(
   return COMPONENT_MAP.filter((e) => platforms.includes(e.platform)).map(
     (e) => ({ value: e.displayName, label: e.displayName }),
   )
+}
+
+/**
+ * Resolve which annotation kind auto-annotation should create for a known
+ * component-map entry. Mobile entries always produce a `component-note`
+ * (auto-fills the component name); desktop entries follow their
+ * `annotationKind` field. Returns `'skip'` for components that should not be
+ * auto-annotated.
+ */
+export function resolveAutoAnnotationKind(
+  entry: ComponentMapEntry,
+): 'tab' | 'note' | 'component-note' | 'skip' {
+  if (entry.platform === 'desktop') {
+    return entry.annotationKind ?? 'skip'
+  }
+  return 'component-note'
 }

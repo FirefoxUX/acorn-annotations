@@ -429,7 +429,9 @@ export class AnnotationStateManager {
             return { record: existingEntry, existingFound: true }
           } catch (e) {
             console.warn('Failed to add to existing annotation:', e)
-            throw new Error('Failed to add to existing annotation', { cause: e })
+            throw new Error('Failed to add to existing annotation', {
+              cause: e,
+            })
           }
         } else {
           throw new Error('Annotation with this reference already exists!')

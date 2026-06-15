@@ -10,8 +10,8 @@ import { Reference } from './reference'
 export class ReferenceUtils {
   /**
    * Safely parses a string reference, returning null if parsing fails. Tries
-   * the Reference class first, then falls back to legacy regex parsing for
-   * edge cases like non-numeric/non-letter input.
+   * the Reference class first, then falls back to legacy regex parsing for edge
+   * cases like non-numeric/non-letter input.
    */
   static tryParseReference(reference: SingleReference): {
     referenceNumber: number

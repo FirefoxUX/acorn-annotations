@@ -104,6 +104,12 @@ export interface MessageTypes {
     ) => ReturnType<typeof code.mergeAnnotation>
   >
   'regroup-annotations': Msg<() => ReturnType<typeof code.regroupAnnotations>>
+  'auto-annotate-acorn-components': Msg<
+    () => ReturnType<typeof code.autoAnnotateAcornComponents>
+  >
+  'auto-annotate-all-components': Msg<
+    () => ReturnType<typeof code.autoAnnotateAllComponents>
+  >
   'reorder-annotation-by-index': Msg<
     (
       currentStrReference: string,

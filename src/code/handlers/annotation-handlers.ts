@@ -751,38 +751,25 @@ function calculatePositionAndSize(
   appendFrame: FrameNode,
   node?: SceneNode,
 ): { position: [number, number]; size: [number, number] } {
+  let position: [number, number]
+  let size: [number, number]
+
   if (multi && node) {
-    // Calculate position and size for a single node
     const nodePosition = sceneUtils.getRelativePosition(node, appendFrame)
-    const position: [number, number] = [nodePosition.x, nodePosition.y]
-    const size: [number, number] = [node.width, node.height]
-
-    // Apply padding if needed
-    if (padding) {
-      position[0] -= 8
-      position[1] -= 8
-      size[0] += 16
-      size[1] += 16
-    }
-
-    return { position, size }
+    position = [nodePosition.x, nodePosition.y]
+    size = [node.width, node.height]
   } else {
-    // Calculate bounding box for all selected elements
-    const selection = figma.currentPage.selection
-    const boundingBox = sceneUtils.calculateBoundingBox(selection, appendFrame)
-    const position: [number, number] = [boundingBox.minX, boundingBox.minY]
-    const size: [number, number] = [boundingBox.width, boundingBox.height]
-
-    // Apply padding if needed (different padding values for group)
-    if (padding) {
-      position[0] -= 8
-      position[1] -= 8
-      size[0] += 16
-      size[1] += 16
-    }
-
-    return { position, size }
+    const boundingBox = sceneUtils.calculateBoundingBox(
+      figma.currentPage.selection,
+      appendFrame,
+    )
+    position = [boundingBox.minX, boundingBox.minY]
+    size = [boundingBox.width, boundingBox.height]
   }
+
+  return padding
+    ? sceneUtils.applyMarkerPadding(position, size)
+    : { position, size }
 }
 
 async function processAnnotations(
@@ -1111,4 +1098,3 @@ async function detectComponentName(
   if (!instance) return null
   return detectComponentNameForNode(instance)
 }
-

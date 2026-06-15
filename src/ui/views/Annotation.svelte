@@ -71,6 +71,14 @@
     await errorStore.safeRequest('regroup-annotations')
   }
 
+  async function handleAutoAnnotateAcorn() {
+    await errorStore.safeRequest('auto-annotate-acorn-components')
+  }
+
+  async function handleAutoAnnotateAll() {
+    await errorStore.safeRequest('auto-annotate-all-components')
+  }
+
   // Sync Figma canvas selection into the UI annotation list selection.
   $effect(() => {
     const refs = $selection.references
@@ -240,6 +248,15 @@
       label: 'Annotations locked',
       checked: () => $pluginState.lockState === 'annotations-locked',
       onClick: () => handleSetLockState('annotations-locked'),
+    },
+    MENU_SEPARATOR,
+    {
+      label: 'Auto-annotate Acorn components',
+      onClick: handleAutoAnnotateAcorn,
+    },
+    {
+      label: 'Auto-annotate all components',
+      onClick: handleAutoAnnotateAll,
     },
     MENU_SEPARATOR,
     {

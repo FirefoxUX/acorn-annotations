@@ -57,4 +57,3 @@ export const PROPERTY_KEYS = {
   kind: 'Kind',
   type: 'Type',
 }
-

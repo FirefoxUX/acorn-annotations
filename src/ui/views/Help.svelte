@@ -182,8 +182,9 @@
       </li>
       <li>
         <p>
-          <strong>Create an info frame</strong> <em>with auto-layout</em>. Use the
-          "Create info frame" button on the setup screen for a pre-configured one.
+          <strong>Create an info frame</strong> <em>with auto-layout</em>. Use
+          the "Create info frame" button on the setup screen for a
+          pre-configured one.
         </p>
       </li>
       <li>
@@ -195,8 +196,8 @@
     </ol>
 
     <p>
-      Optional: turn on <strong>Use separate info frames</strong> to keep
-      tab/arrow info in a different frame from notes.
+      Optional: turn on <strong>Use separate info frames</strong> to keep tab/arrow
+      info in a different frame from notes.
     </p>
 
     <h4 class="tint--type-title-sans-3">2. Create annotations</h4>
@@ -209,8 +210,8 @@
     <dl>
       <dt><strong>Annotation type</strong></dt>
       <dd>
-        Tab, arrow, note, component-note, or presentational. Button colors
-        match the selected type.
+        Tab, arrow, note, component-note, or presentational. Button colors match
+        the selected type.
       </dd>
 
       <dt>
@@ -306,8 +307,9 @@
       </li>
       <li>
         <p>
-          <strong>Create an info frame</strong> <em>with auto-layout</em>. Use the
-          "Create info frame" button on the setup screen for a pre-configured one.
+          <strong>Create an info frame</strong> <em>with auto-layout</em>. Use
+          the "Create info frame" button on the setup screen for a
+          pre-configured one.
         </p>
       </li>
       <li>
@@ -599,8 +601,8 @@
 
     <p>
       <strong>Grouping:</strong> Group related elements to reduce the number of swipe
-      targets. Elements that belong together semantically — a badge and a title,
-      or a card's header content — can share one annotation. Break down complex cards
+      targets. Elements that belong together semantically — a badge and a title, or
+      a card's header content — can share one annotation. Break down complex cards
       more granularly when they contain a lot of varied content.
     </p>
 

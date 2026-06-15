@@ -93,7 +93,9 @@ export function decodeReference(reference: string): {
       return { referenceNumber: num, subReference: null, guessedKind: 'note' }
     } catch (error) {
       console.warn(`Invalid letter reference: ${reference}`)
-      throw new Error(`Invalid letter reference: ${reference}`, { cause: error })
+      throw new Error(`Invalid letter reference: ${reference}`, {
+        cause: error,
+      })
     }
   }
 

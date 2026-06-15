@@ -1,4 +1,25 @@
+/** Pixels added on each side when an annotation marker is created with padding. */
+export const MARKER_PADDING_PX = 8
+
 const sceneUtils = {
+  /**
+   * Expand a position/size rect outward by `MARKER_PADDING_PX` on every side.
+   * Used by both the manual "with padding" create path and the auto-annotation
+   * `gap` flag.
+   */
+  applyMarkerPadding(
+    position: [number, number],
+    size: [number, number],
+  ): { position: [number, number]; size: [number, number] } {
+    return {
+      position: [
+        position[0] - MARKER_PADDING_PX,
+        position[1] - MARKER_PADDING_PX,
+      ],
+      size: [size[0] + MARKER_PADDING_PX * 2, size[1] + MARKER_PADDING_PX * 2],
+    }
+  },
+
   /** Checks if a node is nested within a target frame */
   isNodeWithinFrame(node: SceneNode, targetFrame: FrameNode): boolean {
     let current: BaseNode | null = node.parent
