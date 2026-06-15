@@ -1,0 +1,16 @@
+{
+  "extends": "@tsconfig/svelte/tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "strict": true,
+    "types": ["@figma/plugin-typings"],
+    "paths": {
+      "tint/*": ["./node_modules/tint/dist/*"],
+      "@src/*": ["./src/*"],
+      "@code/*": ["./src/code/*"],
+      "@ui/*": ["./src/ui/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist", ".vscode", ".git"]
+}

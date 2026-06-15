@@ -1,0 +1,122 @@
+@use '~tint/styles/bootstrap' as bootstrap
+@use './colors'
+
+@include bootstrap.generate-color-variables(colors.$colors)
+
+@media (prefers-color-scheme: dark)
+  @include bootstrap.generate-color-variables(colors.$colors-dark)
+
+:root
+  --color-tab: #9059FF
+  --color-arrow: #008787
+  --color-note: #FF7139
+  --color-component-note: #0090ED
+  --color-presentational: #5B5B66
+  --color-success-primary: #00C28A
+  --color-success-secondary: #ACE3D0
+@media (prefers-color-scheme: dark)
+  :root
+    --color-tab: #BFA1FF
+    --color-arrow: #00BABA
+    --color-note: #FF8F66
+    --color-component-note: #72c0fc
+    --color-presentational: #b5b5ba
+    --color-success-primary: #29FFB3
+    --color-success-secondary: #2B5348
+
+@include bootstrap.generate-font-faces("~tint/fonts")
+
+@include bootstrap.full-bootstrap()
+
+// Define a mixin for annotation-themed elements
+@mixin annotation-themed-styles($type, $color)
+  .annotation-themed.#{$type}
+    --tint-action-secondary-text: var(--color-#{$type})
+    --tint-action-secondary: var(--color-#{$type})
+    --tint-action-primary: var(--color-#{$type})
+    --tint-action-primary-hover: color-mix(in srgb, var(--color-#{$type}) 90%, var(--tint-text) 20%)
+    --tint-action-primary-active: color-mix(in srgb, var(--color-#{$type}) 80%, var(--tint-text) 40%)
+
+// Apply the mixin for each annotation type
+@include annotation-themed-styles('tab', var(--color-tab))
+@include annotation-themed-styles('arrow', var(--color-arrow))
+@include annotation-themed-styles('note', var(--color-note))
+@include annotation-themed-styles('component-note', var(--color-component-note))
+@include annotation-themed-styles('presentational', var(--color-presentational))
+
+body, html
+  height: 100%
+
+body
+  display: flex
+  overflow: hidden
+  flex-direction: row
+  font-family: 'Inter', sans-serif
+
+*
+  scrollbar-width: thin
+  scrollbar-color: color-mix(in srgb, var(--tint-text) 25%, transparent) color-mix(in srgb, var(--tint-bg) 50%, transparent)
+  &::-webkit-scrollbar
+    width: 8px
+    background: color-mix(in srgb, var(--tint-text) 25%, transparent)
+  &::-webkit-scrollbar-thumb
+    background: color-mix(in srgb, var(--tint-bg) 50%, transparent)
+    border-radius: 4px
+  &::-webkit-scrollbar-thumb:hover
+    background: color-mix(in srgb, var(--tint-bg) 50%, transparent)
+
+// Divider style for horizontal rules
+hr.divider
+  border: none
+  border-top: 1px solid var(--tint-card-border)
+  margin: 0
+
+.docs-formatting
+  line-height: 1.4
+  p, dl, ol, ul, h3, h4
+    margin: 0
+    margin-block-end: tint.$size-16
+  h3
+    margin-block-end: tint.$size-16
+  h4
+    margin-block-end: tint.$size-12
+  ol, ul
+    padding-inline-start: tint.$size-16
+    margin-block-end: tint.$size-16
+  ol
+    padding-inline-start: 0
+    counter-reset: custom-counter
+    list-style: none
+    > li
+      position: relative
+      padding-inline-start: tint.$size-24
+      &::before
+        content: counter(custom-counter)
+        counter-increment: custom-counter
+        position: absolute
+        left: 0
+        font-size: 1.2em
+        font-weight: 600
+        color: var(--tint-text-secondary)
+  li
+    margin-block-end: tint.$size-8
+  kbd
+    background: var(--tint-input-bg)
+    border: 1px solid var(--tint-border)
+    border-radius: tint.$size-4
+    padding: tint.$size-2 tint.$size-4
+    font-family: 'Menlo', 'Consolas', 'Courier New', monospace
+    font-size: 0.9em
+    line-height: 1
+    white-space: nowrap
+  dl
+    background: var(--tint-input-bg)
+    border-radius: tint.$size-8
+    padding: tint.$size-16
+    dt
+      margin-block-end: tint.$size-4
+    dd
+      &:not(:last-child)
+        margin-block-end: tint.$size-24
+      p
+        margin-block-end: tint.$size-8

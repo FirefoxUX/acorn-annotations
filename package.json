@@ -1,0 +1,53 @@
+{
+  "name": "acorn-annotations",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "watch": "concurrently \"npm run watch:ui\" \"npm run watch:code\" --names \"UI,CODE\" --prefix-colors \"blue,green\"",
+    "watch:ui": "nodemon --ext svelte,ts,js,scss,sass --watch src/ui --watch src/types.ts --watch src/defaults.ts --watch src/message-handler.ts --watch index.html --watch vite.config.ui.ts --watch vite.config.shared.ts --exec \"npm run build:ui\"",
+    "watch:code": "nodemon --ext ts,js --watch src/code --watch src/types.ts --watch src/defaults.ts --watch src/message-handler.ts --watch vite.config.code.ts --watch vite.config.shared.ts --exec \"npm run build:code\"",
+    "build": "npm run build:clean && npm run build:code && npm run build:ui",
+    "build:debug": "npm run build:clean && npm run build:code:debug && npm run build:ui:debug",
+    "build:clean": "rm -rf dist",
+    "build:code": "vite build --config vite.config.code.ts",
+    "build:code:debug": "vite build --config vite.config.code.ts --sourcemap inline",
+    "build:ui": "vite build --config vite.config.ui.ts",
+    "build:ui:debug": "vite build --config vite.config.ui.ts --sourcemap inline",
+    "preview": "vite preview --config vite.config.ui.ts",
+    "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json",
+    "lint": "eslint src/",
+    "prettier": "prettier --write --check 'src/**/*.*'"
+  },
+  "dependencies": {
+    "sass": "^1.101.0",
+    "svelte": "^5.38.0",
+    "tint": "git://github.com/JulianGaibler/tint.git"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@figma/eslint-plugin-figma-plugins": "*",
+    "@figma/plugin-typings": "*",
+    "@sveltejs/vite-plugin-svelte": "^7.1.2",
+    "@tsconfig/svelte": "^5.0.8",
+    "@types/node": "^25.9.3",
+    "concurrently": "^10.0.3",
+    "eslint": "^10.5.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-astro": "^1.7.0",
+    "eslint-plugin-svelte": "^3.19.0",
+    "globals": "^17.6.0",
+    "nodemon": "^3.1.14",
+    "prettier": "^3.8.4",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-jsdoc": "^1.8.1",
+    "prettier-plugin-svelte": "^4.1.0",
+    "svelte": "^5.56.3",
+    "svelte-check": "^4.6.0",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.61.0",
+    "vite": "^8.0.16",
+    "vite-plugin-html": "^3.2.2",
+    "vite-plugin-singlefile": "^2.3.3"
+  }
+}
