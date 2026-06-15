@@ -150,7 +150,7 @@
         }
       }
 
-      // Convert technical → display name for the component name field
+      // Convert technical name to display name for the component name field
       componentName = toDisplayName(
         getField(templateAnnotation, 'componentName'),
       )
@@ -251,10 +251,10 @@
         const wasNavigation = isNavigationKind(originalKind)
         const isNavigation = isNavigationKind(effectiveKind)
 
-        // If the plugin renamed the reference (kind transition across boundary,
-        // or tab↔arrow within navigation), propagate that to the parent's
-        // selection state BEFORE any tab switch — otherwise the tab-switch
-        // would replaceSelection with a now-stale ref.
+        // If the plugin renamed the reference (kind transition across the
+        // boundary, or between tab and arrow within navigation), propagate
+        // that to the parent's selection state BEFORE any tab switch.
+        // Otherwise the tab-switch would replaceSelection with a stale ref.
         const renamed =
           'newReference' in result && result.newReference
             ? result.newReference

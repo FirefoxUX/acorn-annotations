@@ -71,7 +71,7 @@
     await errorStore.safeRequest('regroup-annotations')
   }
 
-  // Sync Figma canvas selection → UI annotation list selection
+  // Sync Figma canvas selection into the UI annotation list selection.
   $effect(() => {
     const refs = $selection.references
     if (refs.length === 0) {

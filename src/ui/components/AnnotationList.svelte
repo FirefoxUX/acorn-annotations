@@ -235,7 +235,7 @@
     tab?: 'navigation' | 'note',
   ) {
     // Auto-infer tab from refs when caller didn't specify one (canvas-sync path).
-    // Mixed selections leave tab undefined → don't switch.
+    // Mixed selections leave tab undefined, in which case don't switch.
     if (tab === undefined && refs.length > 0) {
       const inNav = refs.some((r) =>
         $navigationAnnotations.some((a) => a.strReference === r),

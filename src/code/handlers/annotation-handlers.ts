@@ -134,8 +134,9 @@ export async function createAnnotationFromSelection(
       publicState.annotationMode === 'displace-group' ||
       annotationType === 'arrow'
 
-    // For single/entire path: auto-switch note → component-note if component detected
-    // Skip when grouped mode spans multiple nodes — the user is annotating a group, not an individual component
+    // For single/entire path: auto-switch note to component-note if a component is detected.
+    // Skip when grouped mode spans multiple nodes, since the user is annotating
+    // a group rather than an individual component.
     let effectiveType = annotationType
     const isGroupedMultipleNodes = !multi && selectedNodes.length > 1
     if (!multi && !isGroupedMultipleNodes && annotationType === 'note') {
@@ -182,8 +183,9 @@ export async function createAnnotationFromSelection(
       }
     }
 
-    // Detect component name and stamp on created records
-    // Skip when grouped mode spans multiple nodes — the annotation covers a group, not an individual component
+    // Detect component name and stamp on created records.
+    // Skip when grouped mode spans multiple nodes, since the annotation covers
+    // a group rather than an individual component.
     if (multi) {
       // Per-node detection: each annotation gets its own component's name (or none)
       const sortedNodes = [...selectedNodes].sort((a, b) => {
@@ -410,8 +412,8 @@ export async function updateMultipleAnnotations(
     const successReferences: string[] = []
     const failedReferences: string[] = []
     // Capture rename when editAnnotation transitions kind across the
-    // navigation/note boundary or tab↔arrow within navigation — those paths
-    // change strReference without the UI passing newReference.
+    // navigation/note boundary, or between tab and arrow within navigation.
+    // Those paths change strReference without the UI passing newReference.
     let transitionRename: string | undefined
 
     for (const strReference of referencesArray) {
@@ -1001,7 +1003,7 @@ async function processAnnotations(
             createdAnnotations.push(result.record)
           }
         } else {
-          // No previous arrow-group member — create new tab with compound ref
+          // No previous arrow-group member, so create a new tab with compound ref.
           const refString = positionBasedRef.reference
           if (
             positionBasedRef.needsShift &&

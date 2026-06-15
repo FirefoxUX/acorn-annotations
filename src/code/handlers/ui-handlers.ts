@@ -231,8 +231,8 @@ export function getDebugInfo(getManager: ManagerGetter) {
     mergedInfoGroups: mergedInfoGroups,
     // Frame IDs the state manager actually writes to. Useful for spotting
     // drift between publicState.frames (what the UI thinks) and what the
-    // plugin is using under the hood (e.g. after a desktop→mobile mode
-    // switch the manager's frame ref is frozen at construction time).
+    // plugin is using under the hood (e.g. after switching from desktop to
+    // mobile mode, the manager's frame ref is frozen at construction time).
     managerFrames: {
       annotationFrameId: manager.annotationFrameId,
       annotationInfoFrameId: manager.annotationInfoFrameId,

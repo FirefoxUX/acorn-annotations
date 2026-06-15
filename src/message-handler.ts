@@ -21,8 +21,8 @@ type NotificationMessage<TData> = {
 /**
  * Message type definitions for the public API between UI and Plugin contexts.
  *
- * Uses Msg<PublicFn> which maps a function's Parameters → data and ReturnType →
- * response. The public function signature must match the parameters the UI
+ * Uses Msg<PublicFn> which maps a function's Parameters to data and ReturnType
+ * to response. The public function signature must match the parameters the UI
  * sends (excluding injected dependencies like publicState, getManager,
  * handleError, etc.).
  */
@@ -30,7 +30,7 @@ type NotificationMessage<TData> = {
 type Msg<T extends (...args: any[]) => any> = FunctionToMessage<T>
 
 export interface MessageTypes {
-  // UI to Plugin messages — frame setup
+  // UI to Plugin messages: frame setup
   'set-frame': Msg<
     (
       kind: 'annotation' | 'info' | 'info-navigation' | 'info-notes',

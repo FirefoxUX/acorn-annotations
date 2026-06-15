@@ -202,7 +202,7 @@ export function transitionAnnotationKind(
     const nextNum = getNextReferenceNumber(context.annotations, newKind)
     newReference = ReferenceUtils.encodeReference(newKind, nextNum, null)
   } else if (oldRecord.kind === 'arrow' && newKind === 'tab') {
-    // Arrow → Tab: keep compound ref if present (e.g., "3B" → tab "3B")
+    // Arrow to tab: keep compound ref if present (e.g., "3B" becomes tab "3B").
     const parsed = ReferenceUtils.tryParseReference(oldReference)
     if (parsed) {
       newReference = ReferenceUtils.encodeReference(
@@ -212,7 +212,7 @@ export function transitionAnnotationKind(
       )
     }
   } else if (oldRecord.kind === 'tab' && newKind === 'arrow') {
-    // Tab → Arrow: keep compound ref if present, add sub-ref 'A' if simple
+    // Tab to arrow: keep compound ref if present, add sub-ref 'A' if simple.
     const parsed = ReferenceUtils.tryParseReference(oldReference)
     if (parsed) {
       newReference = ReferenceUtils.encodeReference(

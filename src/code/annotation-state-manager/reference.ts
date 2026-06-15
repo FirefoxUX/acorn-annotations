@@ -33,19 +33,19 @@ export class Reference {
     if (ref === '') return null
 
     try {
-      // Only numbers → tab
+      // Only numbers means a tab.
       if (/^\d+$/.test(ref)) {
         const num = parseInt(ref, 10)
         return new Reference(num, null, 'tab')
       }
 
-      // Only uppercase letters → note
+      // Only uppercase letters means a note.
       if (/^[A-Z]+$/.test(ref)) {
         const num = lettersToNumber(ref)
         return new Reference(num, null, 'note')
       }
 
-      // Number followed by letters → arrow
+      // Number followed by letters means an arrow.
       const match = ref.match(/^(\d+)([A-Z]+)$/)
       if (match) {
         const baseNumber = parseInt(match[1], 10)

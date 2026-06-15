@@ -44,7 +44,7 @@ export class KindMapper {
   }
 
   /**
-   * Maps internal kind to Figma kind for markers. Base mapping only —
+   * Maps internal kind to Figma kind for markers. Base mapping only. The
    * per-marker display (first marker of tab w/ compound ref = tab, rest =
    * arrow) is handled by ensureMarkerConsistency.
    */

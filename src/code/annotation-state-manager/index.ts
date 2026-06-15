@@ -230,7 +230,7 @@ export class AnnotationStateManager {
         firstMember.kind = 'tab'
         await this.ensureMarkerConsistency(firstMember)
       } else {
-        // No first member found — remove markers from standalone tab
+        // No first member found, so remove markers from standalone tab.
         for (const nodeId of tab.annotationNodeId) {
           await NodeManager.removeNode(nodeId)
         }
@@ -558,7 +558,7 @@ export class AnnotationStateManager {
         }
       }
 
-      // No previous arrow group member — generate a new "NA" ref
+      // No previous arrow group member, so generate a new "NA" ref.
       let targetRefNum: number
       if (spatiallyNext) {
         const nextParsed = ReferenceUtils.tryParseReference(
@@ -764,7 +764,7 @@ export class AnnotationStateManager {
           let annotationsToShift: AnnotationRecord[]
 
           if (isCompoundChange) {
-            // Compound reference change (e.g., "3A" → "3B"):
+            // Compound reference change (e.g., "3A" to "3B"):
             // Only shift within the same arrow group (same referenceNumber, sub >= target)
             annotationsToShift = this.state.annotations.filter((a) => {
               if (a === entry) return false
@@ -799,7 +799,7 @@ export class AnnotationStateManager {
               await InfoUtils.updateAnnotationInfo(this, annotation)
             }
           } else {
-            // Simple reference change (e.g., "2" → "3"):
+            // Simple reference change (e.g., "2" to "3"):
             // Shift by main reference number, excluding compound-ref annotations
             annotationsToShift = this.state.annotations.filter((a) => {
               if (a === entry) return false
@@ -1485,10 +1485,10 @@ export class AnnotationStateManager {
 
   /** Regenerates internal state from Figma nodes */
   async regenerateState(): Promise<void> {
-    // Snapshot of marker → reference before regeneration. Used after the rebuild
-    // to detect canvas-side reference renames so we can reconcile info nodes —
-    // plugin-initiated renames update state.annotations.strReference synchronously
-    // before this runs, so they show no diff and won't re-trigger.
+    // Snapshot of each marker's reference before regeneration. Used after the
+    // rebuild to detect canvas-side reference renames so we can reconcile info
+    // nodes. Plugin-initiated renames update state.annotations.strReference
+    // synchronously before this runs, so they show no diff and won't re-trigger.
     const oldNodeRefMap = new Map<string, string>()
     for (const a of this.state.annotations) {
       for (const id of a.annotationNodeId) oldNodeRefMap.set(id, a.strReference)
@@ -1582,10 +1582,10 @@ export class AnnotationStateManager {
     for (const [referenceStr, { annotations, info }] of annotationMap) {
       const cleanRef = ReferenceUtils.normalizeReference(referenceStr)
 
-      // Determine kind and collect node IDs
+      // Determine kind and collect node IDs.
       // For mixed kinds (e.g., tabNavigation + arrowKeyNavigation on same ref),
-      // prefer tabNavigation — a tab annotation with compound ref can have
-      // per-marker display where first marker is tab and rest are arrows
+      // prefer tabNavigation. A tab annotation with compound ref can have
+      // per-marker display where first marker is tab and rest are arrows.
       let kindForDetermination: FigmaAnnotationKind
       let annotationIds: string[]
 
@@ -1645,7 +1645,7 @@ export class AnnotationStateManager {
 
     // If a marker's reference changed on canvas (without going through the
     // plugin's edit path), or ghost records were filtered, info nodes are now
-    // stale — rebuild them so they re-derive from current annotation content
+    // stale. Rebuild them so they re-derive from current annotation content
     // and orphan info nodes in Figma are deleted.
     let referencesChanged = false
     for (const a of this.state.annotations) {

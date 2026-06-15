@@ -115,7 +115,7 @@ async function updateSelectedReference(setNull = false): Promise<void> {
 
   const annotations = annotationStateManager.annotations
 
-  // Build node ID → annotation record map for O(1) lookups
+  // Build a node ID to annotation record map for O(1) lookups.
   const nodeIdToAnnotation = new Map<string, AnnotationRecord>()
   for (const annotation of annotations) {
     for (const nodeId of annotation.annotationNodeId) {
@@ -156,8 +156,8 @@ figma.on('selectionchange', () => {
   updateSelectedReference()
 })
 
-// UI subscribers re-emit the current selection on demand (e.g. on view mount)
-// — selectionchange doesn't fire at plugin start, so newly-mounted views would
+// UI subscribers re-emit the current selection on demand (e.g. on view mount).
+// selectionchange doesn't fire at plugin start, so newly-mounted views would
 // otherwise see the initial empty store value.
 messenger.on('refresh-selection', () => {
   updateSelectedReference()
@@ -318,7 +318,7 @@ async function initializePlugin() {
         return
       }
 
-      // Phase 2: All validation passed — commit to publicState atomically
+      // Phase 2: All validation passed, commit to publicState atomically.
       publicState.mode = group.mode
       publicState.frames.annotationFrame = annotationFrameRef
       publicState.frames.annotationInfoFrame = annotationInfoFrameRef

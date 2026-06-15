@@ -60,7 +60,7 @@ export async function loadSavedGroup(
   }
 
   try {
-    // Fresh validation — don't trust stale isValid from publicState
+    // Fresh validation; don't trust stale isValid from publicState.
     const annotationFrame = await figma.getNodeByIdAsync(
       group.annotationFrameId,
     )
